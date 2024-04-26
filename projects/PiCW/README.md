@@ -1,5 +1,10 @@
 # PiCW
 A morse code keyer running on Raspberry Pi
+by Kawamata Yoshihiro  [github.com/ykaw/PiCW](https://github.com/ykaw/PiCW/tree/master)
+
+### MODIFIED by slowrunner to output audio to RPi audio jack
+(It clicks like crazy but it works - pulseaudio underrun errors surpressed)
+- Created/copied InputOutputPort_AudioJack_RPi_GPIO.py to InputOutputPort.py 
 
 ## GPIO ports
 * Two input ports for iambic paddles
