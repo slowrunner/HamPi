@@ -11,9 +11,6 @@ import PaddleKeyer     as pdl
 import CwUtilities     as utl
 import MemoryKeyer     as mem
 import ConsoleCommands as cmd
-import playtone        as tone
-
-
 
 print("Welcome to PiCW.py")
 print("  '?'   for the short help.")

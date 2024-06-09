@@ -3,15 +3,12 @@
 # This module uses RPi.GPIOlibrary.
 #
 import RPi.GPIO as GPIO
-from pysinewave import SineWave
+
 import time
 
 # use Broadcom's GPIO number of BCM2835
 #
 GPIO.setmode(GPIO.BCM)
-
-# Alan turn off warnings - running PiCW after an error, gives warning
-GPIO.setwarnings(False)
 
 # definition of ports
 #   The numbers are Broadcom's GPIO number of BCM2835,
@@ -46,10 +43,6 @@ pwm=GPIO.PWM(Out_M, Freq_M)
 pwm.start(0)
 pwm.ChangeFrequency(Freq_M)
 
-# create Raspberry Pi audio output jack sidetone generator
-sidetone = SineWave(pitch = 12)
-sidetone.set_frequency(Freq_M)
-
 # activate TX control line
 #
 def txline_on():
@@ -64,19 +57,11 @@ def txline_off():
 #
 def beep_on():
     pwm.ChangeDutyCycle(50)
-    try:
-        sidetone.play()
-    except Exception:
-        pass
 
 # deacitivate side tone
 #
 def beep_off():
     pwm.ChangeDutyCycle(0)
-    try:
-        sidetone.stop()
-    except Exception:
-        pass
 
 # get side tone frequency
 #
@@ -90,7 +75,6 @@ def set_beepfreq(hz):
 
     Freq_M=hz
     pwm.ChangeFrequency(Freq_M)
-    sidetone.set_frequency(Freq_M)
 
 # get available side tone frequencies
 #
@@ -145,7 +129,8 @@ def bind(in_port, func):
         GPIO.remove_event_detect(in_port)  #  unassign current callback if any
         cb[in_port]=0
 
-    GPIO.add_event_detect(in_port, GPIO.BOTH, callback=func_both, bouncetime=25)
+    # GPIO.add_event_detect(in_port, GPIO.BOTH, callback=func_both, bouncetime=25)
+    GPIO.add_event_detect(in_port, GPIO.BOTH, callback=func_both, bouncetime=15)
     cb[in_port]=1
 
 # termination process for this module
