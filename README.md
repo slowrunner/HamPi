@@ -177,3 +177,20 @@ Terminal: pi@HamPi:~ $ wsjtx
 
 
 - Set for Kenwood TS440S on COM3, audio to QMX device
+
+
+# === puTTY (GUI term emulator)  minicom  (console serial emulator)
+
+### Installation
+sudo apt install -y putty minicom
+
+### Use
+
+- to see devices:
+```
+sudo dmesg | grep tty     
+```
+
+sudo minicom -b 115200 -o -D /dev/ttyUSB0  or
+
+sudo minicom -b 9600 -o -D /dev/tty/ACM1
